@@ -4,3 +4,11 @@
     width: 100%;
     padding: 0 25px;
 }
+
+.movies{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
