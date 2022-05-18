@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import "./Movie.css";
 
-export default function Movie(){
+export default function Movie({id, image}){   
     return (
-        <div className="movie">
-            <img src="https://vejario.abril.com.br/wp-content/uploads/2021/09/gabi-gol-globo.jpg.jpg" alt="movie banner" />
-        </div>
+        <Link to={`/session/${id}`}>
+            <div className="movie">
+                <img src={image} alt="movie banner" />
+            </div>
+        </Link>
     )
 }

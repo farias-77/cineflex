@@ -1,0 +1,43 @@
+.day{
+    width: 100%;
+    padding: 0 25px;
+    margin-bottom: 25px;
+}
+
+.day h4{
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+}
+
+.hourOptions{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.hourOptions a{
+    text-decoration: none;
+}
+
+.hour{
+    width: 83px;
+    height: 43px;
+
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+    background-color: #E8833A;
+    border-radius: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}

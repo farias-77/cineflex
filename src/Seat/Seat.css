@@ -1,0 +1,14 @@
+.seat {
+    background-color: #c3cfd9;
+
+    width: 26px;
+    height: 26px;
+    border: 1px solid #808F9D;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 2% 1.5% 2% 1.5%;
+}

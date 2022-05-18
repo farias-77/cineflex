@@ -1,0 +1,41 @@
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    background-color: #DFE6ED;
+    border: 1px solid #9EADBA;
+
+    height: 117px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+}
+
+.movieName h3{
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    color: #293845;
+
+    word-wrap: break-word;
+}
+
+.movieBanner{
+    width: 64px;
+    height: 89px;
+
+    padding: 8px;
+    background-color: #ffffff;
+
+    object-fit: cover;
+    margin-right: 14px;
+}
+
+.movieBanner img{
+    width: 48px;
+}
