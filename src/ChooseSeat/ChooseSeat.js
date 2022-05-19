@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import "./ChooseSeat.css";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import Seat from "../Seat/Seat.js";
+import StatusOption from "../StatusOption/StatusOption.js";
+import Form from "../Form/Form.js";
+import Footer from "../Footer/Footer.js"
 
 export default function ChooseSeat(){
     
     const { sessionID } = useParams();
     const [seats, setSeats] = useState([]);
+    const [selectedSeats, setSelectedSeats] = useState([]);
+    const [cont, setCont] = useState(0);
     
     useEffect(() => {
         let promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionID}/seats`);
@@ -17,28 +22,66 @@ export default function ChooseSeat(){
         })
     }, [])
 
-    console.log(seats)
+    useEffect(() => {
+        seats.map(seat => seat.selected = false);
+    }, [seats])
+
+    /////////////////////////////
+    useEffect(() => {
+        
+        if(selectedSeats.length > 0 && cont < 1){
+            setSelectedSeats(selectedSeats.map(seat => seat.name));
+            setCont(cont + 1);
+        }
+    }, [selectedSeats]);
+
+    useEffect(() => {
+
+        if(cont === 1){
+            buyTickets(selectedSeats);
+        }
+
+    }, [cont]);
+    
+    function verifySelected(){
+        setSelectedSeats(seats.filter(filterSelected));
+    }
+
+    function filterSelected(seat){
+        if(seat.selected === false){
+            return false;
+        }   
+        return true
+    }
+
+    function buyTickets(seats){
+        let tickets = {
+            ids: seats,
+            name: "Gabriel",
+            cpf:"123456",
+        }
+
+        console.log(tickets);
+    }
+    /////////////////////////////////////
 
     return (
         <div className="chooseSeat">
             <div className="select">Selecione o(s) assento(s)</div>
             <div className="seatOptions">
-                {seats.map((seat) => <Seat name={seat.name} isAvailable={seat.isAvailable}/>)}
+                {seats.map((seat, index) => <Seat key={index} seat={seat} />)}
             </div>
             <div className="possibleStatus">
-                <div className="">
-                    <div className="status selected"></div>
-                    <h4>Selecionado</h4>
-                </div>
-                <div className="">
-                    <div className="status available"></div>
-                    <h4>Disponível</h4>
-                </div>
-                <div className="">
-                    <div className="status unavailable"></div>
-                    <h4>Indisponível</h4>
-                </div>
+                <StatusOption text="Selecionado" statusClass="status selected" />
+                <StatusOption text="Disponível" statusClass="status available" />
+                <StatusOption text="Indisponível" statusClass="status unavailable" />
             </div>
+            <div className="forms">
+                <Form text="Nome do comprador: " inputText="Digite seu nome..." />
+                <Form text="CPF do comprador: " inputText="Digite seu CPF..." />
+            </div>
+            <Link to=""><button onClick={verifySelected}>Reservar assento(s)</button></Link>
+            {/* <Footer sessionID={sessionID}/> */}
         </div>
     )
 }

@@ -32,7 +32,7 @@ export default function ChooseSession(){
                 <div className="select">Selecione o horário</div>
                 {days.map(day => <Day key={day.id} weekday={day.weekday} date={day.date} showtimes={day.showtimes}/>)}
             </div>
-            <Footer name={movieName} image={movieBanner}/>
+            {/* <Footer movieID={movieID} sessionID={false}/> */}
         </>
     )
 }
