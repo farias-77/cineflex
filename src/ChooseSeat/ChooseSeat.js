@@ -26,7 +26,8 @@ export default function ChooseSeat(){
         seats.map(seat => seat.selected = false);
     }, [seats])
 
-    /////////////////////////////
+    
+    ///////////////////////////// criar objeto para o post
     useEffect(() => {
         
         if(selectedSeats.length > 0 && cont < 1){
@@ -61,9 +62,9 @@ export default function ChooseSeat(){
             cpf:"123456",
         }
 
-        let promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", tickets);
-        promise.then(() => {alert('foi')});
-        promise.catch(() => {alert('num foi')});
+        //let promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", tickets);
+        //promise.then(() => {alert('foi')});
+        //promise.catch(() => {alert('nao foi')});
     }
     /////////////////////////////////////
 
@@ -83,7 +84,7 @@ export default function ChooseSeat(){
                 <Form text="CPF do comprador: " inputText="Digite seu CPF..." />
             </div>
             <Link to="/success"><button className="orangeButton" onClick={verifySelected}>Reservar assento(s)</button></Link>
-            {/* <Footer sessionID={sessionID}/> */}
+            <Footer sessionID={sessionID}/>
         </div>
     )
 }

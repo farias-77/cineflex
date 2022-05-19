@@ -16,14 +16,14 @@ export default function Footer({sessionID}){
     }, [])
 
     useEffect(() => {
-        console.log(movieBySession.movie.posterURL);
+        console.log(movieBySession);
     }, [movieBySession])
 
     return(
         <div className="footer">
-            {/* <div className="movieBanner"><img src={movieBySession.movie.posterURL} alt="movie banner" /></div> */}
-            {/* <div className="movieName"><h3>{movieBySession.movie.title}</h3></div> */}
-            {/* <div className="movieSession">{movieBySession.day.weekday} - {movieBySession.name}</div> */}
+            <div className="movieBanner"><img src={movieBySession.movie.posterURL} alt="movie banner" /></div>
+            <div className="movieName"><h3>{movieBySession.movie.title}</h3></div>
+            <div className="movieSession">{movieBySession.day.weekday} - {movieBySession.name}</div>
         </div>
     )
 }
