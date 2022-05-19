@@ -61,7 +61,9 @@ export default function ChooseSeat(){
             cpf:"123456",
         }
 
-        console.log(tickets);
+        let promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", tickets);
+        promise.then(() => {alert('foi')});
+        promise.catch(() => {alert('num foi')});
     }
     /////////////////////////////////////
 
@@ -80,7 +82,7 @@ export default function ChooseSeat(){
                 <Form text="Nome do comprador: " inputText="Digite seu nome..." />
                 <Form text="CPF do comprador: " inputText="Digite seu CPF..." />
             </div>
-            <Link to=""><button onClick={verifySelected}>Reservar assento(s)</button></Link>
+            <Link to="/success"><button className="orangeButton" onClick={verifySelected}>Reservar assento(s)</button></Link>
             {/* <Footer sessionID={sessionID}/> */}
         </div>
     )
