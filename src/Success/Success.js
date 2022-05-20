@@ -1,8 +1,9 @@
 import "./Success.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Success({name, cpf, selectedSeats, sessionInfo, selectedSeatsId}){
+export default function Success({name, cpf, selectedSeats, sessionInfo, selectedSeatsId, setName, setCpf, setSelectedSeats, setSelectedSeatsId, setSessionInfo}){
 
     const [movie, setMovie] = useState({});
     const [aux, setAux] = useState(0);
@@ -24,6 +25,15 @@ export default function Success({name, cpf, selectedSeats, sessionInfo, selected
         
     }, []);
     
+    function backHome(){
+        setName("");
+        setCpf("");
+        setSelectedSeats([]);
+        setSelectedSeatsId([]);
+        setSessionInfo("");
+        console.log("siiiu");
+    }
+
     return (
         <div className="success">
             <div className="select boldGreen">Pedido feito com sucesso!</div>
@@ -41,7 +51,7 @@ export default function Success({name, cpf, selectedSeats, sessionInfo, selected
                 <p>Nome: {name}</p>
                 <p>CPF: {cpf}</p>
             </div>
-            <button className="orangeButton">Voltar para home</button>
+            <Link to="/"><button onClick={backHome} className="orangeButton">Voltar para home</button></Link>
         </div>
     )
 }

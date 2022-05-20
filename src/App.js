@@ -24,7 +24,7 @@ export default function App(){
                 
                 <Route path="/seats/:sessionId" element={<ChooseSeat name={name} setName={setName} cpf={cpf} setCpf={setCpf} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats} setSessionInfo={setSessionInfo} selectedSeatsId={selectedSeatsId} setSelectedSeatsId={setSelectedSeatsId} />} />
                 
-                <Route path="/success" element={<Success sessionInfo={sessionInfo} name={name} cpf={cpf} selectedSeats={selectedSeats} selectedSeatsId={selectedSeatsId}/>} />
+                <Route path="/success" element={<Success sessionInfo={sessionInfo} name={name} setName={setName} cpf={cpf} setCpf={setCpf} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats} selectedSeatsId={selectedSeatsId} setSelectedSeatsId={setSelectedSeatsId} setSessionInfo={setSessionInfo}/> } />
             </Routes>
         </BrowserRouter>  
     )
