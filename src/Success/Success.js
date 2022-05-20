@@ -2,8 +2,8 @@ import "./Success.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Success({name, cpf, selectedSeats, sessionInfo}){
-    
+export default function Success({name, cpf, selectedSeats, sessionInfo, selectedSeatsId}){
+
     const [movie, setMovie] = useState({});
     const [aux, setAux] = useState(0);
     
@@ -13,10 +13,17 @@ export default function Success({name, cpf, selectedSeats, sessionInfo}){
             setMovie({...response.data});
             setAux(1);
         })
+
+        let tickets = {
+            ids: selectedSeatsId,
+            name: name,
+            cpf: cpf,
+        }
+
+        axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', tickets);
+        
     }, []);
     
-    console.log(movie)
-
     return (
         <div className="success">
             <div className="select boldGreen">Pedido feito com sucesso!</div>
@@ -27,7 +34,7 @@ export default function Success({name, cpf, selectedSeats, sessionInfo}){
             </div>
             <div className="requestInfo">
                 <div className="infoType">Ingressos</div>
-                {selectedSeats.map((seat, index) => <p key={ index } >Assento { seat.name }</p>)}
+                {selectedSeats.map((seat, index) => <p key={ index } >Assento { seat }</p>)}
             </div>
             <div className="requestInfo">
                 <div className="infoType">Comprador</div>

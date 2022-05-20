@@ -11,6 +11,7 @@ export default function App(){
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [selectedSeatsId, setSelectedSeatsId] = useState([]);
     const [sessionInfo, setSessionInfo] = useState();
     
     return (
@@ -18,9 +19,12 @@ export default function App(){
             <Header />
             <Routes>
                 <Route path="/" element={<ChooseMovie />} />
+                
                 <Route path="/session/:movieId" element={<ChooseSession />} />
-                <Route path="/seats/:sessionId" element={<ChooseSeat name={name} setName={setName} cpf={cpf} setCpf={setCpf} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats} setSessionInfo={setSessionInfo} />} />
-                <Route path="/success" element={<Success sessionInfo={sessionInfo} name={name} cpf={cpf} selectedSeats={selectedSeats}/>} />
+                
+                <Route path="/seats/:sessionId" element={<ChooseSeat name={name} setName={setName} cpf={cpf} setCpf={setCpf} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats} setSessionInfo={setSessionInfo} selectedSeatsId={selectedSeatsId} setSelectedSeatsId={setSelectedSeatsId} />} />
+                
+                <Route path="/success" element={<Success sessionInfo={sessionInfo} name={name} cpf={cpf} selectedSeats={selectedSeats} selectedSeatsId={selectedSeatsId}/>} />
             </Routes>
         </BrowserRouter>  
     )

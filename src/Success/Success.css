@@ -34,6 +34,10 @@
     margin-bottom: 10px;
 }
 
+.infoType p{
+    margin-bottom: 15px;
+}
+
 .requestInfo p{
     font-weight: 400;
     font-size: 22px;
