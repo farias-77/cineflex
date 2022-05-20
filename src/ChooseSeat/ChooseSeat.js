@@ -7,63 +7,53 @@ import StatusOption from "../StatusOption/StatusOption.js";
 import Form from "../Form/Form.js";
 import FooterSeat from "../FooterSeat/FooterSeat.js";
 
-export default function ChooseSeat(){
+export default function ChooseSeat({name , setName, cpf, setCpf, setSelectedSeats, setSessionInfo}){
     
     const { sessionId } = useParams();
     const [seats, setSeats] = useState([]);
-    const [selectedSeats, setSelectedSeats] = useState([]);
     const [cont, setCont] = useState(0);
+    const [selectedSeatsId, setSelectedSeatsId] = useState([]);
     
     useEffect(() => {
         let promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionId}/seats`);
-
         promise.then(response => {
             setSeats(response.data.seats);
         })
+
+        setSessionInfo(sessionId);
     }, [])
 
     useEffect(() => {
         seats.map(seat => seat.selected = false);
     }, [seats])
 
-    
-    ///////////////////////////// criar objeto para o post
     useEffect(() => {
-        
-        if(selectedSeats.length > 0 && cont < 1){
-            setSelectedSeats(selectedSeats.map(seat => seat.id));
+        if(selectedSeatsId.length > 0 && cont < 1){
+            setSelectedSeatsId(selectedSeatsId.map(seat => seat.id));
+            setSelectedSeats(selectedSeatsId.map(seat => seat.name));
             setCont(cont + 1);
         }
-    }, [selectedSeats]);
+    }, [selectedSeatsId]);
 
     useEffect(() => {
-
         if(cont === 1){
-            console.log(selectedSeats)
-            buyTickets(selectedSeats);
+            buyTickets(selectedSeatsId);
         }
-
     }, [cont]);
     
     function verifySelected(){
+        setSelectedSeatsId(seats.filter(seat => seat.selected === true));
         setSelectedSeats(seats.filter(seat => seat.selected === true));
     }
 
-    function filterSelected(seat){
-        if(seat.selected === false){
-            return false;
-        }   
-        return true
-    }
-
-    function buyTickets(seats){
+    function buyTickets(){
         let tickets = {
-            ids: selectedSeats,
-            name: "Gabriel",
-            cpf:"123456",
+            ids: selectedSeatsId,
+            name: name,
+            cpf:cpf,
         }
 
-        let promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", tickets);
+        //axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", tickets);
     }
 
 
@@ -78,10 +68,12 @@ export default function ChooseSeat(){
                 <StatusOption text="Disponível" statusClass="status available" />
                 <StatusOption text="Indisponível" statusClass="status unavailable" />
             </div>
-            <div className="forms">
-                <Form text="Nome do comprador: " inputText="Digite seu nome..." />
-                <Form text="CPF do comprador: " inputText="Digite seu CPF..." />
-            </div>
+            <form>
+                <div className="forms">
+                    <Form text="Nome do comprador: " inputText="Digite seu nome..." info={name} setInfo={setName} />
+                    <Form text="CPF do comprador: " inputText="Digite seu CPF..." info={cpf} setInfo={setCpf} />
+                </div>
+            </form>
             <Link to="/success"><button className="orangeButton" onClick={verifySelected}>Reservar assento(s)</button></Link>
             <FooterSeat sessionId={sessionId} />
         </div>
