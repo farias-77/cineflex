@@ -31,7 +31,6 @@ export default function Success({name, cpf, selectedSeats, sessionInfo, selected
         setSelectedSeats([]);
         setSelectedSeatsId([]);
         setSessionInfo("");
-        console.log("siiiu");
     }
 
     return (
